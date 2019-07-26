@@ -8,6 +8,8 @@ class Map extends Component{
 
     markers = [];
 
+    map;
+
 
     constructor(props) {
         console.log(props);
@@ -23,54 +25,63 @@ class Map extends Component{
 
         if (isScriptLoadSucceed) {
 
-            var map = new window.google.maps.Map(document.getElementById('map'), {
+            this.map = new window.google.maps.Map(document.getElementById('map'), {
                 zoom: Settings.DEFAULT_ZOOM_LEVEL,
                 center: Settings.CURITIBA
             });
 
 
-            let allPlaces =[];
-            ExternalAPI.getPlaces().then(places => {
+          let allPlaces =[];
+          console.log(this.state);
+
+
+
+
+        //   ExternalAPI.getPlaces().then(places => {
           
-          allPlaces=places;
-          console.log(allPlaces);
-          this.setState({places: allPlaces});
-          console.log(this.state.places);
+        //   allPlaces=places;
+        //   console.log(allPlaces);
+        //   this.setState({places: allPlaces});
+        //   console.log(this.state.places);
 
-          let placeDetails = new window.google.maps.InfoWindow({})
+        //   let placeDetails = new window.google.maps.InfoWindow({})
 
-          allPlaces.map(place=>{
-            console.log(place);
+        //   allPlaces.map(place=>{
+        //     console.log(place);
 
-            let latlong = {lat: place.location.lat, lng: place.location.lng}
+        //     let latlong = {lat: place.location.lat, lng: place.location.lng}
 
-            var marker = new window.google.maps.Marker({
-                position: latlong,
-                map: map,
-                title: place.id,
-                animation: window.google.maps.Animation.DROP
-                // icon: `${place.categories[0].icon.prefix}90${place.categories[0].icon.suffix} //tentativa de carregar
-                // ícone vindo da API do Foursquare. O ícone vem, porém transparente.
-                // `
-              });
+        //     var marker = new window.google.maps.Marker({
+        //         position: latlong,
+        //         map: map,
+        //         title: place.id,
+        //         animation: window.google.maps.Animation.DROP
+        //         // icon: `${place.categories[0].icon.prefix}90${place.categories[0].icon.suffix} //tentativa de carregar
+        //         // ícone vindo da API do Foursquare. O ícone vem, porém transparente.
+        //         // `
+        //       });
 
-              marker.addListener('click', function(){
-                placeDetails.setContent(`<b>${place.name}</b> ---
-               Address: ${place.location.address ? place.location.address: place.location.city ? place.location.city: "Unavailable"}`)  
-                placeDetails.open(map, marker);
-              })
+        //       marker.addListener('click', function(){
+        //         placeDetails.setContent(`<b>${place.name}</b> ---
+        //        Address: ${place.location.address ? place.location.address: place.location.city ? place.location.city: "Unavailable"}`)  
+        //         placeDetails.open(map, marker);
+        //       })
 
-              this.markers.push(marker);
+        //       this.markers.push(marker);
             
-          })
+        //   })
     
-        });
+        // });
         
         }
         else{
             console.error("erro ao carregar script");
             alert("Erro ao carregar script do Maps");
         }
+    }
+
+    componentDidMount(){
+        console.log(this.places);
     }
 
     removeAllMarkers()
@@ -129,6 +140,8 @@ class Map extends Component{
     }
 
     render(){
+
+        console.log(this.props);
         return(
 
             <div id="mapa">

@@ -9,17 +9,23 @@ class SideBar extends Component
         places: PropTypes.array.isRequired
     }
 
+    componentDidMount(){
+      console.log(this.places);
+    }
+
     render()
     {
-        console.log(this.places); //Por algum motivo, essa lista sempre vem vazia;
 
-        return(<div tabIndex="      0"> 
+        console.log(this.state);
+        console.log(this.props.places);
+
+        return(<div tabIndex="0"> 
         <ul>
-          {/* {this.places.map((place) => {
+          {this.props.places.map((place) => {
             return (
-              <li>{'- ' + place.title}</li>
+              <li>{'- ' + place.name}</li>
             )
-          })} */}
+          })}
         </ul>
         </div>);
     }

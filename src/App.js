@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import Map from './components/Map'
@@ -11,7 +10,8 @@ class App extends React.Component {
 
   state = { 
     places:[],
-    markers:[]
+    markers:[],
+    isInfoWindowBeingShown: false,
    }
 
    componentDidMount(){

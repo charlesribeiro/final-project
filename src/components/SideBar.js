@@ -1,11 +1,11 @@
-import { ReactComponent } from "*.svg";
+import React, {Component} from "react";
 
-class SideBar extends ReactComponent
+class SideBar extends Component
 {
-    react()
+    render()
     {
-        return(<div></div>);
+        return(<div>dada</div>);
     }
 }
 
-export default SideBar;
+export default SideBar

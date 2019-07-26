@@ -1,9 +1,8 @@
 Projeto final "Neighborhood Map (React)" da Udacity Brasil.
-Consiste em um mapa de restaurantes que servem sushi na região de Curitiba.
-Nele é possível filtrar os estabelecimento por nome e visualizá-los num mapa.
+Consiste em um mapa de restaurantes que servem sushi na região de Curitiba desenvolvido em React com auxílio de APIs externas.
+Nele é possível filtrar os estabelecimentos por nome e visualizá-los num mapa interativo.
 
-
-Este projeto foi criado inicialmente com [Create React App](https://github.com/facebook/create-react-app).
+Este projeto foi criado inicialmente com o [Create React App](https://github.com/facebook/create-react-app).
 
 ## TL;DR
 

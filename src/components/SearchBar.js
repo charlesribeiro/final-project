@@ -8,13 +8,21 @@ class SearchBar extends Component{
         const searchString = event.target.value;
         console.log("pesquisa", searchString);
 
+        
+        //this.selectMarker();
     }
+
+    // selectMarker()
+    // {
+    //   var id="534f0d0f498e9e7e1f206780";
+    //   window.document.querySelector(`[title="${id}"]`).click()
+    // }
 
     render(){
         return(
-        <div className="search-books-bar">
+        <div className="search-restaurants-bar" role="application">
         
-            <div className="search-books-input-wrapper">
+            <div className="search-restaurants-input-wrapper">
                 <Debounce  time="200" handler="onChange">
                     <input type="text" onChange={this.changeSearchStatus} placeholder="Procurar sushi"/>
                 </Debounce >

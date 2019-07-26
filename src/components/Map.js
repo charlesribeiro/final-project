@@ -47,14 +47,15 @@ class Map extends Component{
             var marker = new window.google.maps.Marker({
                 position: latlong,
                 map: map,
-                title: place.name,
+                title: place.id,
                 animation: window.google.maps.Animation.DROP
-                // icon: `${place.categories[0].icon.prefix}90${place.categories[0].icon.suffix}
+                // icon: `${place.categories[0].icon.prefix}90${place.categories[0].icon.suffix} //tentativa de carregar
+                // ícone vindo da API do Foursquare. O ícone vem, porém transparente.
                 // `
               });
 
               marker.addListener('click', function(){
-                placeDetails.setContent(`${place.name} ---
+                placeDetails.setContent(`<b>${place.name}</b> ---
                Address: ${place.location.address ? place.location.address: place.location.city ? place.location.city: "Unavailable"}`)  
                 placeDetails.open(map, marker);
               })
@@ -63,7 +64,7 @@ class Map extends Component{
             
           })
 
-        //   this.removeAllMarkers();
+    
         });
 
         
@@ -129,12 +130,17 @@ class Map extends Component{
         
       })
 
+      window.google.maps.event.trigger(map,'resize');
+
+
+
     }
 
     render(){
         return(
+
             <div id="mapa">
-                <div id="map" role ="application" style={{height: "93vh", marginTop: "53px", marginBottom: "-53px"}}></div>
+                <div id="map" role ="application"  tabIndex =    "0" style={{height: "93vh", marginTop: "53px", marginBottom: "-53px"}}></div>
             </div>
         )
     }
@@ -144,4 +150,6 @@ export default scriptLoader(
     ["https://maps.googleapis.com/maps/api/js?key=AIzaSyB9U__HyENMn3a-UYk68jb3zjsSu_8elwQ&libraries=places"]
 )(Map)
 
+
+//Esta thread do stack overflow auxiliou na resolução do carregamento do google maps com o react sem bibliotecas externas
 //https://stackoverflow.com/questions/41709765/how-to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require/45677810#45677810

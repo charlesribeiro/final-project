@@ -9,7 +9,7 @@ import * as ExternalAPI from './utils/ExternalAPI';
 class App extends React.Component {
 
   state = { 
-    places:[],
+    places:[{id:"4dc5d9df887717c8802f2143", name:"Sushi arte", location:{lat:-25.462181110065053, lgn:-49.28082373380995}}],
     markers:[],
     isInfoWindowBeingShown: false,
    }
@@ -24,14 +24,13 @@ class App extends React.Component {
    }
 
 
-
   render()
   {
   return (
       <div className="App"> 
-        <SideBar></SideBar>
+        <SideBar places = {this.state.places} ></SideBar>
         <SearchBar></SearchBar>
-        <Map places = {this.state.places} updateMarkers = {this.fillMarkers}>aaa</Map>
+        <Map places = {this.state.places} updateMarkers = {this.fillMarkers}></Map>
       </div>
   );
   }

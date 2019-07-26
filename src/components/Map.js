@@ -1,33 +1,67 @@
 import React, { Component } from 'react';
 import scriptLoader from 'react-async-script-loader';
-
-
-
+import * as Settings from '../utils/Settings'
+import PropTypes from 'prop-types';
+import * as ExternalAPI from '../utils/ExternalAPI';
 
 class Map extends Component{
     constructor(props) {
         console.log(props);
         super(props);
     }
+
+    static propTypes = {
+        places: PropTypes.array.isRequired
+    }
+
+    
+
     componentWillReceiveProps({isScriptLoadSucceed}){
 
-        var curitiba = {lat: -25.4809, lng: -49.3044};
+        
+
         var myLatLng2 = {lat: -25.4819, lng: -49.3044};
 
         if (isScriptLoadSucceed) {
 
-            // var markers = [marker];
-
             var map = new window.google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
-                center: {lat: -25.4809, lng: -49.3044}
+                zoom: Settings.DEFAULT_ZOOM_LEVEL,
+                center: Settings.CURITIBA
             });
 
+
+            let allPlaces =[];
+            ExternalAPI.getPlaces().then(places => {
+          
+          allPlaces=places;
+          console.log(allPlaces);
+          this.setState({places: allPlaces});
+          console.log(this.state.places);
+
+          allPlaces.map(place=>{
+            console.log(place);
+
+            let latlong = {lat: place.location.lat, lng: place.location.lng}
+
             var marker = new window.google.maps.Marker({
-                position: curitiba,
+                position: latlong,
                 map: map,
-                title: 'Testes!'
+                title: place.name
               });
+            
+          })
+    
+        });
+
+            console.log("foi", this.places);
+
+            // var markers = [marker];
+
+            
+
+           
+
+           
 
             var marker2 = new window.google.maps.Marker({
                 position: myLatLng2,
@@ -40,7 +74,7 @@ class Map extends Component{
         }
         else{
             console.error("erro ao carregar script");
-            alert("script not loaded");
+            alert("erro ao carregar script do Maps");
         }
     }
 

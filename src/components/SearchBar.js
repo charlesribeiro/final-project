@@ -5,6 +5,16 @@ import { Debounce  } from 'react-throttle';
 
 class SearchBar extends Component{
 
+
+    changeSearchStatus=(event)=>{
+
+        const searchString = event.target.value;
+
+        console.log("pesquisa", searchString);
+
+
+    }
+
     render(){
         return(
         <div className="search-books-bar">

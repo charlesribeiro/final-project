@@ -6,7 +6,8 @@
     "react": "^16.8.6",
     "react-async-script-loader": "^0.3.0",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "react-throttle": "^0.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

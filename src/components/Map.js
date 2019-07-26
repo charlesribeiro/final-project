@@ -11,7 +11,8 @@ class Map extends Component{
     }
     componentWillReceiveProps({isScriptLoadSucceed}){
 
-        var myLatLng = {lat: -25.4809, lng: -49.3044};
+        var curitiba = {lat: -25.4809, lng: -49.3044};
+        var myLatLng2 = {lat: -25.4819, lng: -49.3044};
 
         if (isScriptLoadSucceed) {
 
@@ -23,10 +24,18 @@ class Map extends Component{
             });
 
             var marker = new window.google.maps.Marker({
-                position: myLatLng,
+                position: curitiba,
                 map: map,
                 title: 'Testes!'
               });
+
+            var marker2 = new window.google.maps.Marker({
+                position: myLatLng2,
+                map: map,
+                title: 'Testes 2!'
+              });
+
+            marker2.setMap(null);
       
         }
         else{
@@ -37,8 +46,8 @@ class Map extends Component{
 
     render(){
         return(
-            <div>
-                <div id="map" style={{height: "600px"}}></div>
+            <div id="mapa">
+                <div id="map" style={{height: "93vh", marginTop: "53px", marginBottom: "-53px"}}></div>
             </div>
         )
     }

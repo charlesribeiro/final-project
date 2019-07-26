@@ -63,10 +63,8 @@ class Map extends Component{
               this.markers.push(marker);
             
           })
-
     
         });
-
         
         }
         else{
@@ -75,17 +73,11 @@ class Map extends Component{
         }
     }
 
-    filter()
-    {
-        console.log("filtrou");
-    }
-
     removeAllMarkers()
     {
         this.markers.map(mk =>{
             mk.setMap(null);
         })
-
 
     }
 
@@ -121,7 +113,7 @@ class Map extends Component{
           });
 
           marker.addListener('click', function(){
-            placeDetails.setContent(`${place.name} ---
+            placeDetails.setContent(`${place.name} --
            Address: ${place.location.address?place.location.address: place.location.city?place.location.city: "Unavailable"}`)  
             placeDetails.open(map, marker);
           })
@@ -140,7 +132,7 @@ class Map extends Component{
         return(
 
             <div id="mapa">
-                <div id="map" role ="application"  tabIndex =    "0" style={{height: "93vh", marginTop: "53px", marginBottom: "-53px"}}></div>
+                <div id="map" role ="application"  tabIndex = "0" style={{height: "93vh", marginTop: "53px", marginBottom: "-53px"}}></div>
             </div>
         )
     }

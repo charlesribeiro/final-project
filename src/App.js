@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-
 import Map from './components/Map'
 import SearchBar from './components/SearchBar';
 import SideBar from './components/SideBar';
-import * as ExternalAPI from './utils/ExternalAPI';
 
 class App extends React.Component {
 
@@ -17,10 +15,6 @@ class App extends React.Component {
    componentDidMount(){
 
     //this.setState({places: allPlaces})
-   }
-
-   fillMarkers(places){
-    console.log("fill");
    }
 
 

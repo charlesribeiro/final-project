@@ -4,8 +4,6 @@ const CLIENT_SECRET = "3UZ45VHPQQAOUPKNN4FGJ0BKSOMZM0SKUXHTCCINPSQLM3UJ";
 const BASE_URL = "https://api.foursquare.com/v2/venues/search?";
 const API_VERSION = "20190726";
 
-
-// export const getPlaces = (latitude, longitude) =>{
 export const getPlaces = () =>{
 
     const parameters ={
@@ -18,7 +16,8 @@ export const getPlaces = () =>{
 
         return fetch(BASE_URL+new URLSearchParams(parameters))
         .then(res => {
-            if (!res.ok) { throw res }
+            if (res.ok==false) 
+            { throw res }
         console.log(res.json);
         return res.json()
         })

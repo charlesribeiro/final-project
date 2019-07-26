@@ -13,4 +13,4 @@ Para rodar o projeto na porta 3000 é necessário apenas:
 
 # APIs Externas
 
-Este projeto utiliza a API do Google Maps e do Foursquare (venues) para exibir seus dados.
+Este projeto utiliza a API do Google Maps (Javascript) e do Foursquare (venues) para exibir seus dados.

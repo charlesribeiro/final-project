@@ -13,6 +13,8 @@ class SideBar extends Component
       console.log(this.places);
     }
 
+
+
     render()
     {
 

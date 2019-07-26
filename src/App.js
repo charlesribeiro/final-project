@@ -13,24 +13,27 @@ class App extends Component {
     isInfoWindowBeingShown: false,
    }
 
-   componentDidMount(){
+   componentWillMount(){
 
     let allPlaces =[];
 
 
-    ExternalAPI.getPlaces().then(places => {  console.log("olha os places", places);  
-    
-      allPlaces=places;
-      console.log(allPlaces);
-      this.setState({places: allPlaces});
-      console.log(this.state.places);});
+      ExternalAPI.getPlaces().then(places => {  
+        
+        console.log("", places);  
+        allPlaces=places;
+        console.log(allPlaces);
+        this.setState({places});
+        console.log(this.state.places);});
    
   }
 
 
 
   render()
+  
   {
+    console.log(this.state.places);
   return (
       <div className="App"> 
         <SideBar places = {this.state.places} ></SideBar>

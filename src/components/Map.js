@@ -20,7 +20,26 @@ class Map extends Component{
         places: PropTypes.array.isRequired
     }
 
+    componentDidUpdate()
+    {
+        debugger;
+        console.log(this.props.places);
+
+    }
+
+    componentWillUpdate()
+    {
+        debugger;
+        console.log(this.props.places);
+    }
+
+
+
     componentWillReceiveProps({isScriptLoadSucceed}){
+
+        console.log(this.props.places);
+        debugger;
+
 
 
         if (isScriptLoadSucceed) {
@@ -33,45 +52,47 @@ class Map extends Component{
 
           let allPlaces =[];
           console.log(this.state);
+          console.log(this.props.places);
 
 
 
 
-        //   ExternalAPI.getPlaces().then(places => {
+          ExternalAPI.getPlaces().then(places => {
           
-        //   allPlaces=places;
-        //   console.log(allPlaces);
-        //   this.setState({places: allPlaces});
-        //   console.log(this.state.places);
+          allPlaces=places;
+          console.log(allPlaces);
+          console.log(this.state);
+          this.setState({places: allPlaces});
+          console.log(this.state.places);
 
-        //   let placeDetails = new window.google.maps.InfoWindow({})
+          let placeDetails = new window.google.maps.InfoWindow({})
 
-        //   allPlaces.map(place=>{
-        //     console.log(place);
+          allPlaces.map(place=>{
+            console.log(place);
 
-        //     let latlong = {lat: place.location.lat, lng: place.location.lng}
+            let latlong = {lat: place.location.lat, lng: place.location.lng}
 
-        //     var marker = new window.google.maps.Marker({
-        //         position: latlong,
-        //         map: map,
-        //         title: place.id,
-        //         animation: window.google.maps.Animation.DROP
-        //         // icon: `${place.categories[0].icon.prefix}90${place.categories[0].icon.suffix} //tentativa de carregar
-        //         // ícone vindo da API do Foursquare. O ícone vem, porém transparente.
-        //         // `
-        //       });
+            var marker = new window.google.maps.Marker({
+                position: latlong,
+                map: this.map,
+                title: place.id,
+                animation: window.google.maps.Animation.DROP
+                // icon: `${place.categories[0].icon.prefix}90${place.categories[0].icon.suffix} //tentativa de carregar
+                // ícone vindo da API do Foursquare. O ícone vem, porém transparente.
+                // `
+              });
 
-        //       marker.addListener('click', function(){
-        //         placeDetails.setContent(`<b>${place.name}</b> ---
-        //        Address: ${place.location.address ? place.location.address: place.location.city ? place.location.city: "Unavailable"}`)  
-        //         placeDetails.open(map, marker);
-        //       })
+              marker.addListener('click', function(){
+                placeDetails.setContent(`<b>${place.name}</b> ---
+               Address: ${place.location.address ? place.location.address: place.location.city ? place.location.city: "Unavailable"}`)  
+                placeDetails.open(this.map, marker);
+              })
 
-        //       this.markers.push(marker);
+              this.markers.push(marker);
             
-        //   })
+          })
     
-        // });
+        });
         
         }
         else{
@@ -80,8 +101,19 @@ class Map extends Component{
         }
     }
 
+    shouldComponentUpdate()
+    {
+        console.log(this.props.places);
+
+        if(this.props && this.props.places){
+            debugger;
+            this.props.places.map(place=>{console.log("chegou o place", place)});
+        }
+        debugger;
+    }
+
     componentDidMount(){
-        console.log(this.places);
+        console.log(this.props.places);
     }
 
     removeAllMarkers()
@@ -91,6 +123,8 @@ class Map extends Component{
         })
 
     }
+
+
 
     updateMarkers()
     {
@@ -140,6 +174,8 @@ class Map extends Component{
     }
 
     render(){
+
+        debugger;
 
         console.log(this.props);
         return(

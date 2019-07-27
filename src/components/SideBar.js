@@ -21,11 +21,11 @@ class SideBar extends Component
         console.log(this.state);
         console.log(this.props.places);
 
-        return(<div tabIndex="0"> 
+        return(<div class="sidebar" tabIndex="0"> 
         <ul>
           {this.props.places.map((place) => {
             return (
-              <li>{'- ' + place.name}</li>
+              <a>{'- ' + place.name}</a>
             )
           })}
         </ul>

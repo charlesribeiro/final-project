@@ -8,9 +8,25 @@ import * as ExternalAPI from './utils/ExternalAPI';
 class App extends Component {
 
   state = { 
-    places:[{id:"4dc5d9df887717c8802f2143", name:"Sushi arte", location:{lat:-25.462181110065053, lgn:-49.28082373380995}}],
-    markers:[],
-    isInfoWindowBeingShown: false,
+
+   }
+
+   constructor(props) {
+    super(props);
+    this.state = {
+      places:[{id:"4dc5d9df887717c8802f2143", name:"Sushi arte", location:{lat:-25.462181110065053, lgn:-49.28082373380995}}],
+      markers:[],
+      isInfoWindowBeingShown: false,
+      searchTerm:"",
+        
+    }
+    this.changePlaces=this.changePlaces.bind(this);
+}
+
+   changePlaces(places){
+     console.log(" foi@", places);
+     console.log(this.state);
+     this.setState({places});
    }
 
    componentWillMount(){
@@ -37,8 +53,8 @@ class App extends Component {
   return (
       <div className="App"> 
         <SideBar places = {this.state.places} ></SideBar>
-        <SearchBar></SearchBar>
-        <Map places = {this.state.places} updateMarkers = {this.fillMarkers}></Map>
+        <SearchBar searchTerm = {this.state.searchTerm}></SearchBar>
+        <Map places = {this.state.places} updateMarkers = {this.fillMarkers} changePlaces={this.changePlaces}></Map>
       </div>
   );
   }

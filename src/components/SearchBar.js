@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import { Debounce  } from 'react-throttle';
+import PropTypes from 'prop-types';
+
 
 class SearchBar extends Component{
 
-    changeSearchStatus=(event)=>{
+    static propTypes = {
+        searchTerm: PropTypes.string.isRequired,
+        changeSearchTerm: PropTypes.func.isRequired
+    }
 
-        const searchString = event.target.value;
-        console.log("pesquisa", searchString);
+    changeSearchStatus=(event)=>{
+        
+        const searchTerm = event.target.value;
+        console.log("pesquisa", this.props.searchTerm);
+
+        this.setState({searchTerm:searchTerm});
+        console.log(this.state); 
 
         
         //this.selectMarker();

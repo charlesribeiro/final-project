@@ -17,7 +17,8 @@ class Map extends Component{
     }
 
     static propTypes = {
-        places: PropTypes.array.isRequired
+        places: PropTypes.array.isRequired,
+        changePlaces: PropTypes.array.isRequired
     }
 
     componentDidUpdate()
@@ -49,25 +50,11 @@ class Map extends Component{
                 center: Settings.CURITIBA
             });
 
-
-          let allPlaces =[];
-          console.log(this.state);
-          console.log(this.props.places);
-
-
-
-
-          ExternalAPI.getPlaces().then(places => {
-          
-          allPlaces=places;
-          console.log(allPlaces);
-          console.log(this.state);
-          this.setState({places: allPlaces});
-          console.log(this.state.places);
-
           let placeDetails = new window.google.maps.InfoWindow({})
 
-          allPlaces.map(place=>{
+          console.log(this.props.places);
+
+          this.props.places.map(place=>{
             console.log(place);
 
             let latlong = {lat: place.location.lat, lng: place.location.lng}
@@ -89,10 +76,54 @@ class Map extends Component{
               })
 
               this.markers.push(marker);
-            
-          })
-    
+
         });
+
+
+
+
+        //   ExternalAPI.getPlaces().then(places => {
+          
+        //   allPlaces=places;
+        //   console.log(allPlaces);
+        //   console.log(this.state);
+        //   //this.setState({places: allPlaces});
+
+        //   this.props.changePlaces(places);
+
+        //   if(this.state)
+        //   {
+        //     console.log(this.state.places);
+        //   }
+
+        //   let placeDetails = new window.google.maps.InfoWindow({})
+
+        //   allPlaces.map(place=>{
+        //     console.log(place);
+
+        //     let latlong = {lat: place.location.lat, lng: place.location.lng}
+
+        //     var marker = new window.google.maps.Marker({
+        //         position: latlong,
+        //         map: this.map,
+        //         title: place.id,
+        //         animation: window.google.maps.Animation.DROP
+        //         // icon: `${place.categories[0].icon.prefix}90${place.categories[0].icon.suffix} //tentativa de carregar
+        //         // ícone vindo da API do Foursquare. O ícone vem, porém transparente.
+        //         // `
+        //       });
+
+        //       marker.addListener('click', function(){
+        //         placeDetails.setContent(`<b>${place.name}</b> ---
+        //        Address: ${place.location.address ? place.location.address: place.location.city ? place.location.city: "Unavailable"}`)  
+        //         placeDetails.open(this.map, marker);
+        //       })
+
+        //       this.markers.push(marker);
+            
+        //   })
+    
+        // });
         
         }
         else{

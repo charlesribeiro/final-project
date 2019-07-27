@@ -10,6 +10,8 @@ class Map extends Component{
 
     map;
 
+    calledAPIAlready = false; //como a API chama um evento que por sua vez muda o state do app 
+
 
     constructor(props) {
         console.log(props);
@@ -18,44 +20,16 @@ class Map extends Component{
 
     static propTypes = {
         places: PropTypes.array.isRequired,
-        changePlaces: PropTypes.array.isRequired
+        changePlaces: PropTypes.func.isRequired,
     }
 
-    componentDidUpdate()
+    showMarkers()
     {
-        debugger;
-        console.log(this.props.places);
-
-    }
-
-    componentWillUpdate()
-    {
-        debugger;
-        console.log(this.props.places);
-    }
-
-
-
-    componentWillReceiveProps({isScriptLoadSucceed}){
-
-        console.log(this.props.places);
-        debugger;
-
-
-
-        if (isScriptLoadSucceed) {
-
-            this.map = new window.google.maps.Map(document.getElementById('map'), {
-                zoom: Settings.DEFAULT_ZOOM_LEVEL,
-                center: Settings.CURITIBA
-            });
-
-          let placeDetails = new window.google.maps.InfoWindow({})
-
-          console.log(this.props.places);
+        let placeDetails = new window.google.maps.InfoWindow({})
 
           this.props.places.map(place=>{
-            console.log(place);
+            // console.log(place);
+            debugger;
 
             let latlong = {lat: place.location.lat, lng: place.location.lng}
 
@@ -76,54 +50,54 @@ class Map extends Component{
               })
 
               this.markers.push(marker);
-
-        });
-
-
-
-
-        //   ExternalAPI.getPlaces().then(places => {
-          
-        //   allPlaces=places;
-        //   console.log(allPlaces);
-        //   console.log(this.state);
-        //   //this.setState({places: allPlaces});
-
-        //   this.props.changePlaces(places);
-
-        //   if(this.state)
-        //   {
-        //     console.log(this.state.places);
-        //   }
-
-        //   let placeDetails = new window.google.maps.InfoWindow({})
-
-        //   allPlaces.map(place=>{
-        //     console.log(place);
-
-        //     let latlong = {lat: place.location.lat, lng: place.location.lng}
-
-        //     var marker = new window.google.maps.Marker({
-        //         position: latlong,
-        //         map: this.map,
-        //         title: place.id,
-        //         animation: window.google.maps.Animation.DROP
-        //         // icon: `${place.categories[0].icon.prefix}90${place.categories[0].icon.suffix} //tentativa de carregar
-        //         // ícone vindo da API do Foursquare. O ícone vem, porém transparente.
-        //         // `
-        //       });
-
-        //       marker.addListener('click', function(){
-        //         placeDetails.setContent(`<b>${place.name}</b> ---
-        //        Address: ${place.location.address ? place.location.address: place.location.city ? place.location.city: "Unavailable"}`)  
-        //         placeDetails.open(this.map, marker);
-        //       })
-
-        //       this.markers.push(marker);
             
-        //   })
-    
-        // });
+          })
+    }
+
+    componentDidUpdate()
+    {
+        // debugger;
+        console.log(this.props.places);
+
+    }
+
+    componentWillUpdate()
+    {
+        // debugger;
+        console.log(this.props.places);
+    }
+
+
+
+    componentWillReceiveProps({isScriptLoadSucceed}){
+
+        console.log("componentWillReceiveProps" , this.props.places);
+
+        if (isScriptLoadSucceed) {
+
+            this.map = new window.google.maps.Map(document.getElementById('map'), {
+                zoom: Settings.DEFAULT_ZOOM_LEVEL,
+                center: Settings.CURITIBA
+            });
+
+          debugger; 
+          
+            if(this.calledAPIAlready == false)
+            {
+            ExternalAPI.getPlaces().then(places => {
+                this.calledAPIAlready=true;
+                this.props.changePlaces(places); 
+                this.showMarkers();
+ 
+                }).catch(error=>
+                    {console.log(error);}
+                );
+            }
+            else
+            {
+                console.log(this.props);
+                this.showMarkers();
+            }
         
         }
         else{
@@ -134,17 +108,19 @@ class Map extends Component{
 
     shouldComponentUpdate()
     {
-        console.log(this.props.places);
+        console.log("shouldComponentUpdate", this.props.places);
 
-        if(this.props && this.props.places){
-            debugger;
-            this.props.places.map(place=>{console.log("chegou o place", place)});
-        }
-        debugger;
+        // if(this.props && this.props.places){
+        //     // debugger;
+        //     this.props.places.map(place=>{console.log("chegou o place", place)});
+
+        //     // this.updateMarkers();
+        // }
+        // debugger;
     }
 
     componentDidMount(){
-        console.log(this.props.places);
+        console.log("componentDidMount ",this.props.places);
     }
 
     removeAllMarkers()
@@ -168,7 +144,7 @@ class Map extends Component{
         });
 
 
-        let allPlaces = this.state.places;
+        let allPlaces = this.props.places;
       
         console.log(this.state.places);
 
@@ -206,9 +182,9 @@ class Map extends Component{
 
     render(){
 
-        debugger;
+        // debugger;
 
-        console.log(this.props);
+        console.log(this.props.places);
         return(
 
             <div id="mapa">

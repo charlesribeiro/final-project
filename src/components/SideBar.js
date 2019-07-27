@@ -9,6 +9,12 @@ class SideBar extends Component
         places: PropTypes.array.isRequired
     }
 
+    
+    constructor(props) {
+      console.log(props);
+      super(props);
+    }
+
     componentDidMount(){
       console.log(this.places);
     }

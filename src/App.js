@@ -21,7 +21,13 @@ class App extends Component {
         
     }
     this.changePlaces=this.changePlaces.bind(this);
+    this.changeSearchTerm=this.changeSearchTerm.bind(this);
 }
+
+  changeSearchTerm(searchTerm)
+  {
+    this.setState({searchTerm});
+  }
 
    changePlaces(places){
      console.log(" foi@", places);
@@ -34,13 +40,13 @@ class App extends Component {
     let allPlaces =[];
 
 
-      ExternalAPI.getPlaces().then(places => {  
+      // ExternalAPI.getPlaces().then(places => {  
         
-        console.log("", places);  
-        allPlaces=places;
-        console.log(allPlaces);
-        this.setState({places});
-        console.log(this.state.places);});
+      //   console.log("", places);  
+      //   allPlaces=places;
+      //   console.log(allPlaces);
+      //   this.setState({places});
+      //   console.log(this.state.places);});
    
   }
 
@@ -53,7 +59,7 @@ class App extends Component {
   return (
       <div className="App"> 
         <SideBar places = {this.state.places} ></SideBar>
-        <SearchBar searchTerm = {this.state.searchTerm}></SearchBar>
+        <SearchBar searchTerm = {this.state.searchTerm} changeSearchTerm={this.changeSearchTerm}></SearchBar>
         <Map places = {this.state.places} updateMarkers = {this.fillMarkers} changePlaces={this.changePlaces}></Map>
       </div>
   );

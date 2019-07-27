@@ -10,12 +10,25 @@ class Map extends Component{
 
     map;
 
+    state = {
+        query:"",
+    }
+
+    currentQuery="";
+
+    
+
     calledAPIAlready = false; //como a API chama um evento que por sua vez muda o state do app 
 
     constructor(props) {
         console.log(props);
         super(props);
+
+        this.state={query:""};
+        this.showMarkers.bind(this);
+
     }
+
 
     static propTypes = {
         places: PropTypes.array.isRequired,
@@ -27,11 +40,12 @@ class Map extends Component{
     {
         let placeDetails = new window.google.maps.InfoWindow({})
 
-        console.log(this.props.places.filter(p=>p.name.includes(this.props.searchTerm)));
+        // console.log(this.props.places.filter(p=>p.name.includes(this.props.searchTerm)));
+        console.log(this.props.places.filter(p=>p.name.includes(this.currentQuery)));
         debugger;
 
-          this.props.places.filter(p=>p.name.includes(this.props.searchTerm)).map(place=>{
-            console.log("place", place);
+          this.props.places.filter(p=>p.name.includes(this.currentQuery)).map(place=>{
+            // console.log("place", place);
             //debugger;
 
             let latlong = {lat: place.location.lat, lng: place.location.lng}
@@ -73,16 +87,27 @@ class Map extends Component{
     componentWillUpdate()
     {
         // debugger;
-        console.log(this.props.places);
+        console.log("componentWillUpdate",this.props.places);
+    }
+    componentWillMount()
+    {
+        // debugger;
+        console.log("componentWillMount",this.props.places);
     }
 
 
 
-    componentWillReceiveProps({isScriptLoadSucceed}){
+    componentWillReceiveProps(nextProps){
 
         console.log("componentWillReceiveProps" , this.props.places);
+        console.log("nextProps" , nextProps);
 
-        if (isScriptLoadSucceed) {
+        this.setState({query: nextProps.searchTerm});
+
+        this.currentQuery = nextProps.searchTerm;
+        console.log(this.state);
+
+        if (nextProps) {
 
 
 
@@ -123,9 +148,19 @@ class Map extends Component{
         }
     }
 
-    shouldComponentUpdate()
+    shouldComponentUpdate(nextProps, nextState)
     {
-        console.log("shouldComponentUpdate", this.props.places);
+        console.log(nextProps, nextState);
+
+        // this.setState({query: nextProps.searchTerm});
+
+        console.log("shouldComponentUpdate", this.props);
+        console.log("shouldComponentUpdate", nextProps);
+
+        this.currentQuery = nextProps.searchTerm; 
+
+        return (this.props.searchTerm !== nextProps.searchTerm)|| 
+        (this.state.query !== nextState.searchTerm);
 
         // if(this.props && this.props.places){
         //     // debugger;

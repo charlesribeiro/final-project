@@ -15,7 +15,7 @@ class App extends Component {
    constructor(props) {
     super(props);
     this.state = {
-      places:[{id:"4dc5d9df887717c8802f2143", name:"Sushi arte", location:{lat:-25.462181110065053, lgn:-49.28082373380995}}],
+      places:[{id:"4dc5d9df887717c8802f2143", name:"Sushi arte", location:{lat:-25.462181110065053, lgn:-49.28082373380995}}], //local de testes
       markers:[],
       isInfoWindowBeingShown: false,
       searchTerm:"",

@@ -104,7 +104,9 @@ class Map extends Component{
                 this.showMarkers();
  
                 }).catch(error=>
-                    {console.log(error);}
+                    {
+                        alert("Falha ao obter dados da API do Google Maps");
+                        console.log(error);}
                 );
             }
             else

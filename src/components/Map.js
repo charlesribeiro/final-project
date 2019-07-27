@@ -42,7 +42,7 @@ class Map extends Component{
 
         // console.log(this.props.places.filter(p=>p.name.includes(this.props.searchTerm)));
         console.log(this.props.places.filter(p=>p.name.includes(this.currentQuery)));
-        debugger;
+        // debugger;
 
           this.props.places.filter(p=>p.name.includes(this.currentQuery)).map(place=>{
             // console.log("place", place);
@@ -111,7 +111,7 @@ class Map extends Component{
 
 
 
-          debugger; 
+        //   debugger; 
           
             if(this.calledAPIAlready == false)
             {

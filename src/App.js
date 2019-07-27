@@ -44,7 +44,7 @@ click=(e, marker)=>{
   {
     this.setState({searchTerm});
     console.log(this.state);
-    debugger;
+    // debugger;
   }
 
    changePlaces(places){

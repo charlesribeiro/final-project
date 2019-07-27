@@ -61,8 +61,13 @@ class Map extends Component{
               });
 
               marker.addListener('click', function(){
+
+                console.log(place);
+                
                 placeDetails.setContent(`<b>${place.name}</b> ---
-               Address: ${place.location.address ? place.location.address: place.location.city ? place.location.city: "Unavailable"}`)  
+               Address: ${place.location.address 
+                ? place.location.address: place.location.city 
+                ? place.location.city: "Unavailable"}`)  
                 placeDetails.open(this.map, marker);
 
                 if (marker.getAnimation() !== null) {
@@ -80,6 +85,10 @@ class Map extends Component{
     componentDidUpdate()
     {
         // debugger;
+
+        this.removeAllMarkers();
+        this.showMarkers();
+        
         console.log(this.props.places);
 
     }
@@ -122,23 +131,12 @@ class Map extends Component{
                     zoom: Settings.DEFAULT_ZOOM_LEVEL,
                     center: Settings.CURITIBA
             });
-            ExternalAPI.getPlaces().then(places => {
-                this.calledAPIAlready=true;
-                this.props.changePlaces(places); 
-                this.removeAllMarkers();
-                this.showMarkers();
- 
-                }).catch(error=>
-                    {
-                        alert("Falha ao obter dados da API do Foursquare");
-                        console.log(error);}
-                );
+
             }
             else
             {
                 console.log(this.props);
-                this.removeAllMarkers();
-                this.showMarkers();
+
             }
         
         }
@@ -172,6 +170,19 @@ class Map extends Component{
     }
 
     componentDidMount(){
+        debugger;
+
+        ExternalAPI.getPlaces().then(places => {
+            this.calledAPIAlready=true;
+            this.props.changePlaces(places); 
+            this.removeAllMarkers();
+            this.showMarkers();
+
+            }).catch(error=>
+                {
+                    alert("Falha ao obter dados da API do Foursquare");
+                    console.log(error);}
+            );
         console.log("componentDidMount ",this.props.places);
     }
 

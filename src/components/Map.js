@@ -12,7 +12,6 @@ class Map extends Component{
 
     calledAPIAlready = false; //como a API chama um evento que por sua vez muda o state do app 
 
-
     constructor(props) {
         console.log(props);
         super(props);
@@ -21,15 +20,19 @@ class Map extends Component{
     static propTypes = {
         places: PropTypes.array.isRequired,
         changePlaces: PropTypes.func.isRequired,
+        searchTerm: PropTypes.string.isRequired,
     }
 
     showMarkers()
     {
         let placeDetails = new window.google.maps.InfoWindow({})
 
-          this.props.places.map(place=>{
-            // console.log(place);
-            debugger;
+        console.log(this.props.places.filter(p=>p.name.includes(this.props.searchTerm)));
+        debugger;
+
+          this.props.places.filter(p=>p.name.includes(this.props.searchTerm)).map(place=>{
+            console.log("place", place);
+            //debugger;
 
             let latlong = {lat: place.location.lat, lng: place.location.lng}
 
@@ -75,18 +78,23 @@ class Map extends Component{
 
         if (isScriptLoadSucceed) {
 
-            this.map = new window.google.maps.Map(document.getElementById('map'), {
-                zoom: Settings.DEFAULT_ZOOM_LEVEL,
-                center: Settings.CURITIBA
-            });
+
 
           debugger; 
           
             if(this.calledAPIAlready == false)
             {
+
+            
+
+            this.map = new window.google.maps.Map(document.getElementById('map'), {
+                    zoom: Settings.DEFAULT_ZOOM_LEVEL,
+                    center: Settings.CURITIBA
+            });
             ExternalAPI.getPlaces().then(places => {
                 this.calledAPIAlready=true;
                 this.props.changePlaces(places); 
+                this.removeAllMarkers();
                 this.showMarkers();
  
                 }).catch(error=>
@@ -96,6 +104,7 @@ class Map extends Component{
             else
             {
                 console.log(this.props);
+                this.removeAllMarkers();
                 this.showMarkers();
             }
         
@@ -130,8 +139,6 @@ class Map extends Component{
         })
 
     }
-
-
 
     updateMarkers()
     {

@@ -22,11 +22,19 @@ class App extends Component {
     }
     this.changePlaces=this.changePlaces.bind(this);
     this.changeSearchTerm=this.changeSearchTerm.bind(this);
+    
 }
+
+  onSetSidebarOpen(open) {
+    this.setState({ sidebarOpen: open });
+  }
+
 
   changeSearchTerm(searchTerm)
   {
     this.setState({searchTerm});
+    console.log(this.state);
+    debugger;
   }
 
    changePlaces(places){
@@ -37,7 +45,6 @@ class App extends Component {
 
    componentWillMount(){
 
-    let allPlaces =[];
 
 
       // ExternalAPI.getPlaces().then(places => {  
@@ -50,17 +57,18 @@ class App extends Component {
    
   }
 
-
-
   render()
   
   {
     console.log(this.state.places);
   return (
       <div className="App"> 
-        <SideBar places = {this.state.places} ></SideBar>
+
+      
+        <Map places = {this.state.places} updateMarkers = {this.fillMarkers} changePlaces={this.changePlaces} searchTerm = {this.state.searchTerm}></Map>
+        <SideBar searchTerm = {this.state.searchTerm} places = {this.state.places} ></SideBar>
         <SearchBar searchTerm = {this.state.searchTerm} changeSearchTerm={this.changeSearchTerm}></SearchBar>
-        <Map places = {this.state.places} updateMarkers = {this.fillMarkers} changePlaces={this.changePlaces}></Map>
+
       </div>
   );
   }

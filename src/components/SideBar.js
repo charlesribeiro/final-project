@@ -6,7 +6,8 @@ class SideBar extends Component
 {
 
     static propTypes = {
-        places: PropTypes.array.isRequired
+        places: PropTypes.array.isRequired,
+        searchTerm: PropTypes.string.isRequired,
     }
 
     
@@ -19,19 +20,22 @@ class SideBar extends Component
       console.log(this.places);
     }
 
+    click()
+    {
+      console.log("click", this);
+    }
+
 
 
     render()
     {
-
-        console.log(this.state);
         console.log(this.props.places);
 
         return(<div class="sidebar" tabIndex="0"> 
-        <ul>
-          {this.props.places.map((place) => {
+        <ul className='location-list' role='tablist'>
+          {this.props.places.filter(p=>p.name.includes(this.props.searchTerm)).map((place) => {
             return (
-              <a>{'- ' + place.name}</a>
+              <button onClick={(e) =>this.click(e, place)} id={place.id}> {place.name}</button>
             )
           })}
         </ul>

@@ -41,7 +41,7 @@ class Map extends Component{
         let placeDetails = new window.google.maps.InfoWindow({})
 
         // console.log(this.props.places.filter(p=>p.name.includes(this.props.searchTerm)));
-        console.log(this.props.places.filter(p=>p.name.includes(this.currentQuery)));
+        console.log(this.props.places.filter(p=>p.name.localeCompare(this.currentQuery)));
         // debugger;
 
           this.props.places.filter(p=>p.name.includes(this.currentQuery)).map(place=>{
@@ -130,7 +130,7 @@ class Map extends Component{
  
                 }).catch(error=>
                     {
-                        alert("Falha ao obter dados da API do Google Maps");
+                        alert("Falha ao obter dados da API do Foursquare");
                         console.log(error);}
                 );
             }

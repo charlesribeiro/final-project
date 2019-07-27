@@ -69,7 +69,8 @@ click=(e, marker)=>{
   render()
   
   {
-    console.log(this.state.places);
+    console.log(this.state.places, this.state.searchTerm);
+    debugger;
   return (
       <div className="App"> 
       
@@ -96,7 +97,7 @@ click=(e, marker)=>{
       >
         
       
-        <Map places = {this.state.places} updateMarkers = {this.fillMarkers} changePlaces={this.changePlaces} searchTerm = {this.state.searchTerm}></Map>
+        <Map places = {this.state.places.filter(p=>p.name.includes(this.state.searchTerm))} updateMarkers = {this.fillMarkers} changePlaces={this.changePlaces} searchTerm = {this.state.searchTerm}></Map>
         {/* <SideBar searchTerm = {this.state.searchTerm} places = {this.state.places} ></SideBar> */}
         {/* <SearchBar searchTerm = {this.state.searchTerm} changeSearchTerm={this.changeSearchTerm}></SearchBar> */}
         </Sidebar>

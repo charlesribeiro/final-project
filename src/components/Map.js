@@ -27,11 +27,15 @@ class Map extends Component{
     {
         let placeDetails = new window.google.maps.InfoWindow({})
 
+        console.log("this.props.searchTerm", this.props.searchTerm);
+
         console.log(this.props.places.filter(p=>p.name.includes(this.props.searchTerm)));
         debugger;
 
-          this.props.places.filter(p=>p.name.includes(this.props.searchTerm)).map(place=>{
-            console.log("place", place);
+          this.props.places
+        //   .filter(p=>p.name.includes(this.props.searchTerm))
+          .map(place=>{
+            // console.log("place", place);
             //debugger;
 
             let latlong = {lat: place.location.lat, lng: place.location.lng}
@@ -80,7 +84,8 @@ class Map extends Component{
 
     componentWillReceiveProps({isScriptLoadSucceed}){
 
-        console.log("componentWillReceiveProps" , this.props.places);
+        // console.log("componentWillReceiveProps" , this.props.places, this.props.searchTerm);
+        console.log("componentWillReceiveProps" , this.props.searchTerm);
 
         if (isScriptLoadSucceed) {
 
@@ -137,7 +142,7 @@ class Map extends Component{
     }
 
     componentDidMount(){
-        console.log("componentDidMount ",this.props.places);
+        console.log("componentDidMount ",this.props.searchTerm);
     }
 
     removeAllMarkers()
@@ -148,66 +153,12 @@ class Map extends Component{
 
     }
 
-    updateMarkers()
-    {
-
-        this.removeAllMarkers();
-
-        var map = new window.google.maps.Map(document.getElementById('map'), {
-            zoom: Settings.DEFAULT_ZOOM_LEVEL,
-            center: Settings.CURITIBA
-        });
-
-
-        let allPlaces = this.props.places;
-      
-        console.log(this.state.places);
-
-        let placeDetails = new window.google.maps.InfoWindow({})
-
-        allPlaces.map(place=>{
-        console.log(place);
-
-        let latlong = {lat: place.location.lat, lng: place.location.lng}
-
-        var marker = new window.google.maps.Marker({
-            position: latlong,
-            map: map,
-            title: place.name,
-            animation: window.google.maps.Animation.DROP
-            // icon: `${place.categories[0].icon.prefix}90${place.categories[0].icon.suffix}
-            // `
-          });
-
-          marker.addListener('click', function(){
-            placeDetails.setContent(`${place.name} --
-           Address: ${place.location.address?place.location.address: place.location.city?place.location.city: "Unavailable"}`)  
-            placeDetails.open(map, marker);
-
-            if (marker.getAnimation() !== null) {
-                marker.setAnimation(null);
-              } else {
-                marker.setAnimation(window.google.maps.Animation.BOUNCE);
-              }
-          })
-
-          
-
-          this.markers.push(marker);
-        
-      })
-
-      window.google.maps.event.trigger(map,'resize');
-
-
-
-    }
 
     render(){
 
         // debugger;
 
-        console.log(this.props.places);
+        console.log(this.props.places, this.props.searchTerm);
         return(
 
             <div id="mapa">

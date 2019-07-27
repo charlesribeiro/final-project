@@ -18,7 +18,7 @@ export const getPlaces = () =>{
         .then(res => {
             if (res.ok==false) 
             { throw res }
-        console.log(res.json);
+        // console.log(res.json);
         return res.json()
         })
         .then(data => data.response.venues)

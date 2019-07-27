@@ -13,12 +13,6 @@
   display: block;
 }
 
-#leftsideMenu ul li a:hover {
-  background-color: lightgreen;
-  transition: 0.5s;
-  padding-left: 30px;
-  padding-right: 10px;
-}
 
 /* inspirado em https://stackoverflow.com/questions/3486110/make-a-list-item-clickable-html-css */
 
@@ -27,4 +21,9 @@ padding-left: 0;}
 
 .search-restaurants-input-wrapper{
   width: 100%
+}
+
+li::before  {
+  content: "\01F363";
+  /* ícone de sushi */
 }

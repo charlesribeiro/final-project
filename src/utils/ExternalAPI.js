@@ -22,8 +22,8 @@ export const getPlaces = () =>{
         return res.json()
         })
         .then(data => data.response.venues)
-        .catch(error => {
-            console.error(error)
-            window.alert("Foursquare API failed...")
-        })
+        // .catch(error => {
+        //     console.error(error)
+        //     window.alert("Foursquare API failed...")
+        // })
 }

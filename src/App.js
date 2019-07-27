@@ -71,8 +71,9 @@ class App extends Component {
     console.log(this.state.places);
   return (
       <div className="App"> 
-
-<Sidebar
+      
+    
+    <Sidebar role="navigation"
         sidebar={<div>
           <h1>Sushi em Curitiba</h1>  
           <SearchBar searchTerm = {this.state.searchTerm} changeSearchTerm={this.changeSearchTerm}>
@@ -81,7 +82,7 @@ class App extends Component {
             <ul className='location-list' role='tablist' class="list" >
               {this.state.places.filter(p=>p.name.includes(this.state.searchTerm)).map((place) => {
                 return (
-                  <li onClick={(e) =>this.click(e)} id={place.id}> {place.name}</li>
+                  <li onClick={(e) =>this.click(e)} id={place.id}>{place.name} </li>
                 )
               })}
             </ul>

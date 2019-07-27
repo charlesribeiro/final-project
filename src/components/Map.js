@@ -50,6 +50,12 @@ class Map extends Component{
                 placeDetails.setContent(`<b>${place.name}</b> ---
                Address: ${place.location.address ? place.location.address: place.location.city ? place.location.city: "Unavailable"}`)  
                 placeDetails.open(this.map, marker);
+
+                if (marker.getAnimation() !== null) {
+                    marker.setAnimation(null);
+                  } else {
+                    marker.setAnimation(window.google.maps.Animation.BOUNCE);
+                  }
               })
 
               this.markers.push(marker);
@@ -175,7 +181,15 @@ class Map extends Component{
             placeDetails.setContent(`${place.name} --
            Address: ${place.location.address?place.location.address: place.location.city?place.location.city: "Unavailable"}`)  
             placeDetails.open(map, marker);
+
+            if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+              } else {
+                marker.setAnimation(window.google.maps.Animation.BOUNCE);
+              }
           })
+
+          
 
           this.markers.push(marker);
         

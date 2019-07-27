@@ -29,10 +29,12 @@ class App extends Component {
     
 }
 
-  click=(e)=>{
-    console.log(e);
-  }
-
+click=(e, marker)=>{
+  // console.log(e, name);
+    if(window.document.querySelector(`[title="${marker.id}"]`)){
+    window.document.querySelector(`[title="${marker.id}"]`).click()
+    } 
+}
   onSetSidebarOpen(open) {
     //this.setState({ sidebarOpen: open });
   }
@@ -46,7 +48,6 @@ class App extends Component {
   }
 
    changePlaces(places){
-     console.log(" foi@", places);
      console.log(this.state);
      this.setState({places});
    }
@@ -82,7 +83,7 @@ class App extends Component {
             <ul className='location-list' role='tablist' class="list" >
               {this.state.places.filter(p=>p.name.includes(this.state.searchTerm)).map((place) => {
                 return (
-                  <li onClick={(e) =>this.click(e)} id={place.id}>{place.name} </li>
+                  <li onClick={(e) =>this.click(e, place)} id={place.id}>{place.name} </li>
                 )
               })}
             </ul>

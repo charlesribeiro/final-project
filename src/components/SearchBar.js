@@ -34,7 +34,7 @@ class SearchBar extends Component{
         
             <div className="search-restaurants-input-wrapper">
                 <Debounce  time="500" handler="onChange">
-                    <input type="text" onChange={this.changeSearchStatus} placeholder="Procurar sushi"/>
+                    <input type="text" onChange={this.changeSearchStatus} placeholder="Buscar restaurantes"/>
                 </Debounce >
             </div>
         </div>)

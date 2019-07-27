@@ -119,7 +119,7 @@ class Map extends Component{
         }
         else{
             console.error("erro ao carregar script");
-            alert("Erro ao carregar script do Maps");
+            alert("Erro ao carregar script do Foursquare");
         }
     }
 

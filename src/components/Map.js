@@ -8,6 +8,11 @@ class Map extends Component{
 
     markers = [];
 
+    state = {
+        query: "",
+        places:[],
+    }
+
     map;
 
     calledAPIAlready = false; //como a API chama um evento que por sua vez muda o state do app 
@@ -27,12 +32,14 @@ class Map extends Component{
     {
         let placeDetails = new window.google.maps.InfoWindow({})
 
-        console.log("this.props.searchTerm", this.props.searchTerm);
+        // console.log("this.props.searchTerm", this.props.searchTerm);
 
-        console.log(this.props.places.filter(p=>p.name.includes(this.props.searchTerm)));
+        console.log("showMarkers",this.state.query);
+
+        console.log(this.props.places.filter(p=>p.name.includes(this.state.query)));
         debugger;
 
-          this.props.places
+          this.state.places
         //   .filter(p=>p.name.includes(this.props.searchTerm))
           .map(place=>{
             // console.log("place", place);
@@ -82,12 +89,22 @@ class Map extends Component{
 
 
 
-    componentWillReceiveProps({isScriptLoadSucceed}){
+    componentWillReceiveProps(nextProps){
+
+        console.log(nextProps);
+        // console.log(isScriptLoadSucceed);
 
         // console.log("componentWillReceiveProps" , this.props.places, this.props.searchTerm);
-        console.log("componentWillReceiveProps" , this.props.searchTerm);
+        console.log("componentWillReceiveProps" , nextProps.searchTerm);
 
-        if (isScriptLoadSucceed) {
+
+        console.log(this.state);
+        debugger;
+        this.setState({query:nextProps.searchTerm, places:nextProps.places});
+        debugger;
+        console.log(this.state);
+        if (nextProps) {
+            
 
 
 

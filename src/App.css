@@ -1,3 +1,30 @@
 .App {
   text-align: center;
 }
+
+#leftsideMenu ul li {
+  border-bottom: 1px dashed lightgray;
+  background-color: rgba(244,121,131 , 0.753);
+}
+
+#leftsideMenu ul li a {
+  padding: 8px 20px 8px 20px;
+  color: white;
+  display: block;
+}
+
+#leftsideMenu ul li a:hover {
+  background-color: lightgreen;
+  transition: 0.5s;
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
+/* inspirado em https://stackoverflow.com/questions/3486110/make-a-list-item-clickable-html-css */
+
+.list{list-style-type:none;
+padding-left: 0;}
+
+.search-restaurants-input-wrapper{
+  width: 100%
+}

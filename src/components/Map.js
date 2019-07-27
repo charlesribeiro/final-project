@@ -195,7 +195,7 @@ class Map extends Component{
         return(
 
             <div id="mapa">
-                <div id="map" role ="application"  tabIndex = "0" style={{height: "93vh", marginTop: "53px", marginBottom: "-53px"}}></div>
+                <div id="map" role ="application"  tabIndex = "0" style={{height: "100vh", marginTop: "0px", marginBottom: "0px"}}></div>
             </div>
         )
     }

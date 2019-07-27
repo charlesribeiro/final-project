@@ -4,6 +4,7 @@ import Map from './components/Map'
 import SearchBar from './components/SearchBar';
 import SideBar from './components/SideBar';
 import * as ExternalAPI from './utils/ExternalAPI';
+import Sidebar from "react-sidebar";
 
 class App extends Component {
 
@@ -18,6 +19,9 @@ class App extends Component {
       markers:[],
       isInfoWindowBeingShown: false,
       searchTerm:"",
+      sidebarOpen: true,
+      sidebarDocked: true,
+
         
     }
     this.changePlaces=this.changePlaces.bind(this);
@@ -25,8 +29,12 @@ class App extends Component {
     
 }
 
+  click=(e)=>{
+    console.log(e);
+  }
+
   onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
+    //this.setState({ sidebarOpen: open });
   }
 
 
@@ -64,11 +72,32 @@ class App extends Component {
   return (
       <div className="App"> 
 
+<Sidebar
+        sidebar={<div>
+          <h1>Sushi em Curitiba</h1>  
+          <SearchBar searchTerm = {this.state.searchTerm} changeSearchTerm={this.changeSearchTerm}>
+            </SearchBar>
+            <div class="sidebar" id= "leftsideMenu" tabIndex="0"> 
+            <ul className='location-list' role='tablist' class="list" >
+              {this.state.places.filter(p=>p.name.includes(this.state.searchTerm)).map((place) => {
+                return (
+                  <li onClick={(e) =>this.click(e)} id={place.id}> {place.name}</li>
+                )
+              })}
+            </ul>
+        </div>
+
+            </div>}
+        open={this.state.sidebarOpen}
+        docked={this.state.sidebarDocked}
+        onSetOpen={this.onSetSidebarOpen}
+      >
+        
       
         <Map places = {this.state.places} updateMarkers = {this.fillMarkers} changePlaces={this.changePlaces} searchTerm = {this.state.searchTerm}></Map>
-        <SideBar searchTerm = {this.state.searchTerm} places = {this.state.places} ></SideBar>
-        <SearchBar searchTerm = {this.state.searchTerm} changeSearchTerm={this.changeSearchTerm}></SearchBar>
-
+        {/* <SideBar searchTerm = {this.state.searchTerm} places = {this.state.places} ></SideBar> */}
+        {/* <SearchBar searchTerm = {this.state.searchTerm} changeSearchTerm={this.changeSearchTerm}></SearchBar> */}
+        </Sidebar>
       </div>
   );
   }

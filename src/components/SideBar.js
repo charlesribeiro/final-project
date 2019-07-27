@@ -32,7 +32,7 @@ class SideBar extends Component
         console.log(this.props.places);
 
         return(<div class="sidebar" tabIndex="0"> 
-        <ul className='location-list' role='tablist'>
+        <ul className='location-list' role='tablist' class="menuitems">
           {this.props.places.filter(p=>p.name.includes(this.props.searchTerm)).map((place) => {
             return (
               <button onClick={(e) =>this.click(e, place)} id={place.id}> {place.name}</button>

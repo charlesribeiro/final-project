@@ -116,24 +116,12 @@ class Map extends Component{
 
     componentWillReceiveProps({isScriptLoadSucceed}){
 
-        //console.log("componentWillReceiveProps" , this.props.places);
-        //console.log("nextProps" , nextProps);
-
-        //this.setState({query: nextProps.searchTerm});
-
-        //this.currentQuery = nextProps.searchTerm;
-        //console.log(this.state);
+        //https://www.npmjs.com/package/react-async-script-loader
 
         if (isScriptLoadSucceed) {
 
-
-
-        //   debugger; 
-          
             if(this.calledAPIAlready == false)
             {
-
-            
 
             this.map = new window.google.maps.Map(document.getElementById('map'), {
                     zoom: Settings.DEFAULT_ZOOM_LEVEL,
@@ -144,7 +132,6 @@ class Map extends Component{
             else
             {
                 console.log(this.props);
-
             }
         
         }

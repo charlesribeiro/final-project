@@ -53,16 +53,6 @@ click=(e, marker)=>{
    }
 
    componentWillMount(){
-
-
-
-      // ExternalAPI.getPlaces().then(places => {  
-        
-      //   console.log("", places);  
-      //   allPlaces=places;
-      //   console.log(allPlaces);
-      //   this.setState({places});
-      //   console.log(this.state.places);});
    
   }
 
@@ -97,8 +87,6 @@ click=(e, marker)=>{
         
       
         <Map places = {this.state.places} updateMarkers = {this.fillMarkers} changePlaces={this.changePlaces} searchTerm = {this.state.searchTerm}></Map>
-        {/* <SideBar searchTerm = {this.state.searchTerm} places = {this.state.places} ></SideBar> */}
-        {/* <SearchBar searchTerm = {this.state.searchTerm} changeSearchTerm={this.changeSearchTerm}></SearchBar> */}
         </Sidebar>
       </div>
   );

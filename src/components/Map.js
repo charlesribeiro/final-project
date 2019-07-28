@@ -38,6 +38,9 @@ class Map extends Component{
 
     showMarkers()
     {
+
+        if(window.google)
+        {
         let placeDetails = new window.google.maps.InfoWindow({})
 
         // console.log(this.props.places.filter(p=>p.name.includes(this.props.searchTerm)));
@@ -80,6 +83,11 @@ class Map extends Component{
               this.markers.push(marker);
             
           })
+        }
+        else
+        {
+            console.error("window undefined");
+        }
     }
 
     componentDidUpdate()
@@ -106,17 +114,17 @@ class Map extends Component{
 
 
 
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps({isScriptLoadSucceed}){
 
-        console.log("componentWillReceiveProps" , this.props.places);
-        console.log("nextProps" , nextProps);
+        //console.log("componentWillReceiveProps" , this.props.places);
+        //console.log("nextProps" , nextProps);
 
-        this.setState({query: nextProps.searchTerm});
+        //this.setState({query: nextProps.searchTerm});
 
-        this.currentQuery = nextProps.searchTerm;
-        console.log(this.state);
+        //this.currentQuery = nextProps.searchTerm;
+        //console.log(this.state);
 
-        if (nextProps) {
+        if (isScriptLoadSucceed) {
 
 
 
@@ -142,7 +150,7 @@ class Map extends Component{
         }
         else{
             console.error("erro ao carregar script");
-            alert("Erro ao carregar script do Foursquare");
+            alert("Erro ao carregar script do maps");
         }
     }
 

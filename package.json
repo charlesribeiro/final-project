@@ -4,11 +4,10 @@
   "private": true,
   "dependencies": {
     "escape-string-regexp": "^2.0.0",
-    "eslint": "^6.6.0",
     "react": "^16.14.0",
     "react-async-script-loader": "^0.3.0",
     "react-dom": "^16.14.0",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "5.0.1",
     "react-sidebar": "^3.0.2",
     "react-throttle": "^0.3.0"
   },
@@ -19,7 +18,12 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "no-irregular-whitespace": "error",
+    "rules": {
+      "no-debugger": "error",
+      "no-console": "error"
+    }
   },
   "browserslist": {
     "production": [
@@ -32,5 +36,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.4.0"
   }
 }

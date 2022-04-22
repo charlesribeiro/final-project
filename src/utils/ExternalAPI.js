@@ -14,8 +14,7 @@ export const getPlaces = () => {
 
   return fetch(BASE_URL + new URLSearchParams(parameters))
     .then((res) => {
-      if (res.ok == false) { throw res; }
-      console.log(res.json);
+      if (res.ok === false) { throw res; }
       return res.json();
     })
     .then((data) => data.response.venues);

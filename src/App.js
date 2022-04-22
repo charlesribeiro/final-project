@@ -1,25 +1,26 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import Sidebar from 'react-sidebar';
 import './App.css';
-import Map from './components/Map'
+import Map from './components/Map';
 import SearchBar from './components/SearchBar';
-import Sidebar from "react-sidebar";
 
 class App extends Component {
-  state = {};
+  state;
 
   constructor(props) {
     super(props);
     this.state = {
       places: [
         {
-          id: "4dc5d9df887717c8802f2143",
-          name: "Sushi arte",
+          id: '4dc5d9df887717c8802f2143',
+          name: 'Sushi arte',
           location: { lat: -25.462181110065053, lgn: -49.28082373380995 },
         },
-      ], //local de testes
+      ],
+      //local de testes
       markers: [],
       isInfoWindowBeingShown: false,
-      searchTerm: "",
+      searchTerm: '',
       sidebarOpen: true,
       sidebarDocked: true,
     };
@@ -41,10 +42,7 @@ class App extends Component {
     this.setState({ places });
   }
 
-  componentWillMount() {}
-
   render() {
-    console.log(this.state.places);
     return (
       <div className="App">
         <Sidebar
@@ -57,7 +55,7 @@ class App extends Component {
                 changeSearchTerm={this.changeSearchTerm}
               ></SearchBar>
               <div className="sidebar" id="leftsideMenu" tabIndex="0">
-                <ul className="location-list" role="tablist" class="list">
+                <ul className="location-list" role="tablist" className="list">
                   {this.state.places
                     .filter((p) => p.name.includes(this.state.searchTerm))
                     .map((place) => {

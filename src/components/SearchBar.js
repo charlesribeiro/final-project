@@ -8,10 +8,6 @@ class SearchBar extends Component {
     changeSearchTerm: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   changeSearchStatus = (event) => {
     const searchTerm = event.target.value;
     this.props.changeSearchTerm(searchTerm);

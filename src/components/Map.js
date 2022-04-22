@@ -24,9 +24,6 @@ class Map extends Component {
   };
 
   constructor(props) {
-
-
-    console.log(props);
     super(props);
 
     this.state = { query: '' };
@@ -38,7 +35,6 @@ class Map extends Component {
       const placeDetails = new window.google.maps.InfoWindow({});
 
       this.props.places.filter((p) => p.name.includes(this.currentQuery)).map((place) => {
-
         const latlong = { lat: place.location.lat, lng: place.location.lng };
 
         const marker = new window.google.maps.Marker({
@@ -49,12 +45,10 @@ class Map extends Component {
         });
 
         marker.addListener('click', function () {
-          console.log(place);
-
           placeDetails.setContent(`<b>${place.name}</b> ---
                Address: ${place.location.address
-        ? place.location.address : place.location.city
-        ? place.location.city : 'Unavailable'}`);
+    ? place.location.address : place.location.city
+      ? place.location.city : 'Unavailable'}`);
           placeDetails.open(this.map, marker);
 
           if (marker.getAnimation() !== null) {
@@ -86,7 +80,6 @@ class Map extends Component {
           center: Settings.CURITIBA,
         });
       } else {
-        console.log(this.props);
       }
     } else {
       console.error('erro ao carregar script');
@@ -97,8 +90,10 @@ class Map extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     this.currentQuery = nextProps.searchTerm;
 
-    return (this.props.searchTerm !== nextProps.searchTerm)
-        || (this.state.query !== nextState.searchTerm);
+    return (
+      this.props.searchTerm !== nextProps.searchTerm
+      || this.state.query !== nextState.searchTerm
+    );
   }
 
   componentDidMount() {
@@ -113,7 +108,7 @@ class Map extends Component {
   }
 
   removeAllMarkers() {
-    this.markers.map((mk) => {
+    this.markers.forEach((mk) => {
       mk.setMap(null);
     });
   }
@@ -130,9 +125,7 @@ class Map extends Component {
 
     const placeDetails = new window.google.maps.InfoWindow({});
 
-    allPlaces.map((place) => {
-      console.log(place);
-
+    allPlaces.forEach((place) => {
       const latlong = { lat: place.location.lat, lng: place.location.lng };
 
       const marker = new window.google.maps.Marker({
@@ -140,8 +133,6 @@ class Map extends Component {
         map,
         title: place.name,
         animation: window.google.maps.Animation.DROP,
-        // icon: `${place.categories[0].icon.prefix}90${place.categories[0].icon.suffix}
-        // `
       });
 
       marker.addListener('click', () => {
@@ -175,5 +166,7 @@ export default scriptLoader(
   ['https://maps.googleapis.com/maps/api/js?key=AIzaSyB9U__HyENMn3a-UYk68jb3zjsSu_8elwQ&libraries=places'],
 )(Map);
 
-// Esta thread do stack overflow auxiliou na resolução do carregamento do google maps com o react sem bibliotecas externas
-// https://stackoverflow.com/questions/41709765/how-to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require/45677810#45677810
+// Esta thread do stack overflow auxiliou na resolução do carregamento do
+// google maps com o react sem bibliotecas externas
+// https://stackoverflow.com/questions/41709765/
+// how-to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require/45677810#45677810

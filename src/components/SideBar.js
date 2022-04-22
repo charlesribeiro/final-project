@@ -8,7 +8,6 @@ class SideBar extends Component {
   };
 
   constructor(props) {
-    console.log(props);
     super(props);
   }
 
@@ -16,13 +15,7 @@ class SideBar extends Component {
     console.log(this.places);
   }
 
-  click() {
-    console.log('click', this);
-  }
-
   render() {
-    console.log(this.props.places);
-
     return (
       <div className="sidebar" tabIndex="0">
         <ul className="location-list" role="tablist" className="menuitems">
